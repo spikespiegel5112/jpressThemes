@@ -1,0 +1,42 @@
+<#include "inc/layout.html"/>
+<@layout>
+<section class="container">
+    <@jp.searchResultPage pagesize=20>
+        <div class="content-wrap">
+            <div class="content">
+                <h1 class="title"><strong>${k!} 的搜索结果</strong></h1>
+                <#if page.getList()?size gt 0>
+                    <#list page.getList() as content >
+                        <article class="excerpt excerpt-one">
+                            <header>
+                                <!--<a class="cat label label-important" href="#" data-original-title="" title="">会·生活<i
+                                        class="label-arrow"></i></a>-->
+                                <h2><a target="_blank" href="${content.url!}"
+                                       title="${content.title!}">${content.title!}</a>
+                                </h2>
+                                <small class="text-muted" data-original-title="" title=""><span
+                                        class="glyphicon glyphicon-picture"></span>
+                                </small>
+                            </header>
+                            <p class="note">${content.description!}</p>
+
+                        </article>
+                    </#list>
+                    <#else>
+                        <h3 class="text-muted text-center">暂无搜索结果</h3>
+                </#if>
+
+            </div>
+        </div>
+
+        <#include "inc/paginate.html"/>
+
+
+</@jp.searchResultPage>
+<!-- 右边 -->
+<#include "inc/right.html"/>
+<!-- 右边 -->
+
+</section>
+
+</@layout>

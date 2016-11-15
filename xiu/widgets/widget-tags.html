@@ -1,0 +1,10 @@
+<div class="widget widget_tags">
+    <h3 class="title"><strong>热门标签</strong></h3>
+    <ul class="widget_tags_inner">
+        <@jp.tags module="xiu" count=21>
+        <#list tags as tag>
+            <li><a title="" href="${tag.url!}" data-original-title="2个话题">${tag.title!}</a></li>
+        </#list>
+        </@jp.tags>
+    </ul>
+</div>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <#include "inc/meta.html"/>
+</head>
+<html>
+<body class="error404 uimo ui-navtop" data-navto="/">
+<#include "inc/header.html"/>
+<section class="container">
+
+    <div class="content-wrap">
+        <div class="content">
+            <div class="e404"><img src="${CTPATH}/images/404.png">
+                <h1>404 . Not Found</h1>
+                <p>沒有找到你要的内容！</p><br>
+                <p><a class="btn btn-primary" href="${CPATH}/">返回首页</a></p></div>
+        </div>
+    </div>
+
+
+</section>
+<#include "inc/footer.html"/>
+<script>
+    window.jui = {
+        uri: '${CTPATH}',
+        roll: '1 2',
+        ajaxpager: '0'
+    }
+</script>
+<script language="javascript" type="text/javascript" src="${CTPATH}/js/jquery.js?ver=5.2"></script>
+<script language="javascript" type="text/javascript" src="${CTPATH}/js/jquery.foxaudioplayer.js?ver=4.3.4"></script>
+<script language="javascript" type="text/javascript" src="${CTPATH}/js/bootstrap.min.js?ver=5.2"></script>
+<script language="javascript" type="text/javascript" src="${CTPATH}/js/hammer.min.js"></script>
+<script language="javascript" type="text/javascript" src="${CTPATH}/js/custom.js?ver=5.2"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<div class="sticky">
+    <h3 class="title"><strong>热门推荐</strong></h3>
+    <ul>
+        <@jp.contents module="xiu" count="4" orderby="view_count" hasThumbnail="true">
+        <#list contents as content>
+            <li class="item">
+                <a target="_blank" href="${content.url!}">
+                    <img data-original="${CPATH}${content.thumbnailByName('t1')!}" class="thumb"
+                         src="${CPATH}${content.thumbnailByName('t1')!}" style="display: block;">${content.title!}
+                    <span>${content.remark!}</span>
+                </a>
+            </li>
+        </#list>
+    </@jp.contents>
+    </ul>
+</div>

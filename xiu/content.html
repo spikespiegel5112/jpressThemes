@@ -1,0 +1,237 @@
+<!DOCTYPE HTML>
+<html style="overflow: visible;">
+<head>
+    <#include "inc/meta.html"/>
+    <script src="${CPATH}/counter?cid=${content.id!}"></script>
+</head>
+<html>
+<body class="single single-post postid-${content.id!} single-format-standard uimo ui-navtop">
+
+<#include "inc/header.html"/>
+<!-- 内容 -->
+
+<section class="container">
+    <div class="content-wrap">
+        <div class="content">
+            <header class="article-header">
+                <div class="breadcrumbs"><span class="text-muted">当前位置：</span><a href="${CPATH}/">${WEB_NAME!}</a>
+                    <small>&gt;</small>
+                    <!--<a href="#" title="#">${content.getTaxonomyAsUrl('category')!'未分类'}</a>-->
+                    ${content.getTaxonomyAsUrl('category')!'未分类'}
+                    <small>&gt;</small>
+                    <span class="text-muted">正文</span></div>
+                <h1 class="article-title"><a href="${content.url!}">${content.title!}</a></h1>
+                <ul class="article-meta">
+                    <li><a href="#">${content.nickname!content.username!}</a> 发布于
+                        ${content.created?string('yyyy-MM-dd HH:mm')!}
+                    </li>
+                    <li>分类：<a href="#" title="" rel="category tag"
+                              data-original-title="View all posts in ${content.getTaxonomyAsString('category')!'未分类'}">${content.getTaxonomyAsUrl('category')!'未分类'}</a>
+                    </li>
+                    <li><span class="post-views">阅读(${content.view_count!'0'})</span></li>
+                    <li>评论(${content.comment_count!0})</li>
+                    <li></li>
+                </ul>
+            </header>
+            <article class="article-content">
+                <p>${content.text!}</p>
+                <p class="post-copyright">未经允许不得转载：${content.getTaxonomyAsUrl('category')!'未分类'} » <a
+                        href="${content.url!}">${content.title!}</a></p>
+            </article>
+            <div class="article-social">
+                <!--<a href="javascript:;" class="action action-like" data-pid="520" data-event="like"><i
+                        class="glyphicon glyphicon-thumbs-up"></i>赞 (<span>${content.voteUp!0}</span>)</a>-->
+
+                <#if OPTION('xiu_wechat_pay_enable')?? && OPTION('xiu_wechat_pay_enable')=='true'>
+                    <div class="reward-content">
+                        <p><img src="${CPATH}${OPTION('xiu_wechat_pay_image')!}"/> </p>
+                        <p>${OPTION('xiu_wechat_pay_tips')!'打赏一个呗~~'}</p>
+                    </div>
+                </#if>
+            </div>
+
+            <!--<div class="action-share bdsharebuttonbox" data-bd-bind="1472696782195">
+                分享到：<a class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                <a class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                <a class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                <a class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+                <a class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+                <a class="bds_bdhome" data-cmd="bdhome" title="分享到百度新首页"></a>
+                <a class="bds_tqf" data-cmd="tqf" title="分享到腾讯朋友"></a>
+                <a class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+                <a class="bds_diandian" data-cmd="diandian" title="分享到点点网"></a>
+                <a class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+                <a class="bds_ty" data-cmd="ty" title="分享到天涯社区"></a>
+                <a class="bds_kaixin001" data-cmd="kaixin001" title="分享到开心网"></a>
+                <a class="bds_taobao" data-cmd="taobao"></a>
+                <a class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+                <a class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+                <a class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+                <a class="bds_mail" data-cmd="mail" title="分享到邮件分享"></a>
+                <a class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+                <a class="bds_more" data-cmd="more">更多</a>
+            </div>-->
+            <div class="article-tags">
+                标签：${content.getTagsAsUrl()?replace(',','')!}
+                <!--<a href="${CPATH}/xiu--1.html" rel="tag" data-original-title=""
+                   title="">xxx</a>-->
+            </div>
+            <nav class="article-nav">
+                <span class="article-nav-prev">
+                    <@jp.previous>
+                     <#if content??>
+                        上一篇<br>
+                        <a href="${content.url!}" rel="prev">${content.title!}</a>
+                    </#if>
+                    </@jp.previous>
+                </span>
+                <span class="article-nav-next">
+                    <@jp.next>
+                    <#if content??>
+                        下一篇<br>
+                        <a href="${content.url!}" rel="prev">${content.title!}</a>
+                    </#if>
+                    </@jp.next>
+                </span>
+            </nav>
+
+            <div class="relates relates-model-thumb"><h3 class="title"><strong>相关推荐</strong></h3>
+                <ul>
+                    <@jp.contents module="xiu" count=4 hasThumbnail="true" typeslug="${taxonomys[0].slug!}">
+                    <#list contents as content>
+                    <li><a target="_blank" href="${content.url!}"><span><img
+                            data-original="${content.thumbnail!}"
+                            class="thumb"
+                            src="${content.thumbnail!}"
+                            style="display: inline;"></span>${content.title!}</a></li>
+                    </#list>
+                    </@jp.contents>
+                </ul>
+            </div>
+
+            <#if content.isCommentEnable() >
+                <h3 class="title" id="comments">
+                    <div class="text-muted pull-right">
+                    </div>
+                    <strong>评论 <b> ${content.comment_count!0}</b></strong>
+                </h3>
+                <div id="respond" class="no_webshot">
+                    <form action="${CPATH}/comment/submit" method="post" id="commentform">
+                        <input type="hidden" name="cid" value="${(content.id)!}" >
+                        <input type="hidden" name="anchor" value="comment" >
+                        <input type="hidden" id="parent_id" name="parent_id" >
+                        <div class="comt-title">
+                            <div class="comt-avatar">
+                                <img alt=""
+                                     data-original="${CPATH}${TPATH+'/images/avatar-default.png'}"
+                                     class="avatar avatar-50 photo avatar-default" height="50" width="50"
+                                     src="${CPATH}${TPATH+'/images/avatar-default.png'}"></div>
+                            <div class="comt-author">
+                            </div>
+                            <a id="cancel-comment-reply-link" href="javascript:;">取消</a>
+                        </div>
+
+                        <div class="comt">
+                            <div class="comt-box">
+                            <textarea placeholder="你的评论可以一针见血" class="input-block-level comt-area" name="text"
+                                      id="comment" cols="100%" rows="3" tabindex="1"
+                                      onkeydown="if(event.ctrlKey&amp;&amp;event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
+                                <div class="comt-ctrl">
+                                    <div class="comt-tips">
+                                        <label for="comment_mail_notify" class="checkbox inline hide" style="padding-top:0"><input
+                                                type="checkbox" name="comment_mail_notify" id="comment_mail_notify"
+                                                value="comment_mail_notify" checked="checked">有人回复时邮件通知我</label>
+                                        <div class="comt-tip comt-loading" style="display: none;">正在提交, 请稍候...</div>
+                                        <div class="comt-tip comt-error" style="display: none;">#</div>
+                                    </div>
+                                    <button type="submit" name="submit" id="submit" tabindex="5"><i
+                                            class="icon-ok-circle icon-white icon12"></i> 发表评论
+                                    </button>
+                                    <!-- <span data-type="comment-insert-smilie" class="muted comt-smilie"><i class="icon-thumbs-up icon12"></i> 表情</span> -->
+                                </div>
+                            </div>
+
+                            <div class="comt-comterinfo" id="comment-author-info">
+                                <ul>
+                                    <li class="form-inline">
+                                        <label class="hide" for="author">昵称</label>
+                                        <input class="ipt"
+                                               type="text"
+                                               name="author"
+                                               id="author"
+                                               value=""
+                                               tabindex="2"
+                                               placeholder="昵称">
+                                    <span
+                                            class="text-muted">昵称 (必填)</span>
+                                    </li>
+                                    <li class="form-inline">
+                                        <label class="hide" for="email">邮箱</label>
+                                        <input class="ipt"
+                                               type="text"
+                                               name="email"
+                                               id="email"
+                                               value=""
+                                               tabindex="3"
+                                               placeholder="邮箱">
+                                    <span
+                                            class="text-muted">邮箱 (必填)</span>
+                                    </li>
+                                    <!--<li class="form-inline">
+                                        <label class="hide" for="url">网址</label>
+                                        <input class="ipt"
+                                                                                                           type="text"
+                                                                                                           name="url"
+                                                                                                           id="url" value=""
+                                                                                                           tabindex="4"
+                                                                                                           placeholder="网址">
+                                        <span
+                                            class="text-muted">网址</span></li>-->
+                                </ul>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <@jp.commentPage pageSize="10">
+                <div id="postcomments">
+                    <ol class="commentlist">
+                        <#list page.getList() as comment>
+                            <li class="comment even thread-even depth-1" id="comment-${comment.id!}">
+                                <div class="c-avatar">
+                                    <img data-original="${CPATH}${comment.avatar!TPATH+'/images/avatar-default.png'}" class="avatar avatar-100" height="100" width="100" src="${CPATH}${comment.avatar!TPATH+'/images/avatar-default.png'}" style="display: block;"></div>
+                                <div class="c-main" id="div-comment-141">
+                                    <span class="c-author">${comment.author!comment.nickname!comment.username!} </span>${comment.text!}<time class="c-time">${(comment.created?string("yyyy-MM-dd"))!}</time>
+                                    <a rel="nofollow" class="comment-reply-link" href="#comment" onclick="reply('${comment.id!}')" aria-label="Reply to ${comment.author!comment.nickname!comment.username!}">回复</a>
+                                </div>
+                            </li>
+                            <!-- #comment-## -->
+                            <!--<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-202"><div class="c-avatar"><img data-original="https://secure.gravatar.com/avatar/73f6a21520bb6aeb2aeeef066f4d6039" class="avatar avatar-100" height="100" width="100" src="https://secure.gravatar.com/avatar/73f6a21520bb6aeb2aeeef066f4d6039" style="display: block;"></div><div class="c-main" id="div-comment-202"><span class="c-author"><a href="http://wwww" rel="external nofollow" class="url" target="_blank">232323</a></span>反反复复反反复复吩咐<time class="c-time">1年前 (2015-06-04)</time><a rel="nofollow" class="comment-reply-link" href="http://blog.weknow.cn/313.shtml?replytocom=202#respond" onclick="return addComment.moveForm( &quot;div-comment-202&quot;, &quot;202&quot;, &quot;respond&quot;, &quot;313&quot; )" aria-label="Reply to 232323">回复</a></div></li>&lt;!&ndash; #comment-## &ndash;&gt;-->
+                        </#list>
+                    </ol>
+                    <div class="pagenav">
+                        <#include "inc/paginate.html"/>
+                    </div>
+                </div>
+                </@jp.commentPage>
+            </#if>
+
+        </div>
+    </div>
+
+    <!-- 右边 -->
+    <#include "inc/right.html"/>
+    <!-- 右边 -->
+
+</section>
+
+<!-- 内容 -->
+
+
+<#include "inc/footer.html"/>
+
+<div class="rollto" style="display: block;"><a href="javascript:scroll(0,0)"></a></div>
+
+</body>
+</html>

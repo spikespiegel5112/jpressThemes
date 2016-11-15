@@ -1,0 +1,26 @@
+<#macro layout>
+    <!DOCTYPE HTML>
+    <html>
+    <head>
+        <#include "meta.html"/>
+    </head>
+    <html>
+    <body class="archive category  uimo ui-navtop" >
+        <#include "header.html"/>
+        <#nested>
+        <#include "footer.html"/>
+            <script>
+                window.jui = {
+                    uri: '${CTPATH}',
+                    roll: '1 2',
+                    ajaxpager: '0'
+                }
+            </script>
+            <script language="javascript" type="text/javascript" src="${CTPATH}/js/jquery.js?ver=5.2"></script>
+            <script language="javascript" type="text/javascript" src="${CTPATH}/js/jquery.foxaudioplayer.js?ver=4.3.4"></script>
+            <script language="javascript" type="text/javascript" src="${CTPATH}/js/bootstrap.min.js?ver=5.2"></script>
+            <script language="javascript" type="text/javascript" src="${CTPATH}/js/hammer.min.js"></script>
+            <script language="javascript" type="text/javascript" src="${CTPATH}/js/custom.js?ver=5.2"></script>
+    </body>
+    </html>
+</#macro>

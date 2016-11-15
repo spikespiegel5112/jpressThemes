@@ -1,0 +1,197 @@
+<#include "inc/layout.html"/>
+<@layout>
+<section class="container">
+    <div class="content-wrap">
+        <div class="content">
+
+            <!-- 图片滚动 -->
+            <!--<div id="slider" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <@jp.contents module="xiu" count=4 >
+                    <#list contents as content>
+                        <li data-target="#slider" data-slide-to="${content_index+1}" class="active"></li>
+                    </#list>
+                    </@jp.contents>
+                </ol>
+                <div class="carousel-inner">
+                    <@jp.contents module="xiu" count=4 >
+                    <#list contents as content>
+                        <div class="item">
+                            <a target="_blank" href="${content.url!}">
+                                <img src="${content.thumbnail!content.getFirstImage()!}">
+                                <span class="carousel-caption">${content.title!}</span>
+                                <span class="carousel-bg"></span>
+                            </a>
+                        </div>
+                    </#list>
+                    </@jp.contents>
+                </div>
+                <a class="left carousel-control" href="#slider" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                </a>
+                <a class="right carousel-control" href="#slider" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </a>
+            </div>-->
+        <!-- 图片滚动 -->
+
+
+        <!-- 缩略图 -->
+            <div class="focusmo">
+                <ul>
+                    <@jp.contents module="xiu" count="5" hasThumbnail="true">
+                    <#list contents as content>
+                        <#if content?is_first >
+                            <li class="large"><a target="_blank" href="${content.url!}">
+                                <img class="thumb" data-original="${content.thumbnail!content.getFirstImage()}"
+                                     src="${content.thumbnail!content.getFirstImage()}" style="display: inline;"><h4>
+                                ${content.title!}</h4></a></li>
+                            <#else>
+                                <li><a target="_blank" href="${content.url!}">
+                                    <img data-original="${CPATH}${content.thumbnailByName('t1')!}" class="thumb"
+                                         src="${CPATH}${content.thumbnailByName('t1')!}" style="display: inline;"><h4>
+                                    ${content.title!}</h4></a></li>
+                        </#if>
+                    </#list>
+                </@jp.contents>
+                </ul>
+            </div>
+
+            <!-- 缩略图 -->
+
+
+            <!-- 热门排行 -->
+            <div class="most-comment-posts">
+                <h3 class="title"><strong>一周热门排行</strong></h3>
+                <ul>
+                    <li>暂无文章！</li>
+                </ul>
+            </div>
+            <!-- 热门排行 -->
+            <#include "widgets/widget-hots.html"/>
+            <!-- 热门排行 -->
+
+
+            <!-- 最近更新 -->
+            <h3 class="title">
+                <small class="pull-right">24小时更新：0篇 &nbsp; &nbsp; 一周更新：0篇</small>
+                <strong>最近更新</strong></h3>
+
+            <@jp.indexPage module="xiu">
+            <#list page.getList() as content>
+                <#if content.getImageCount() gt 4>
+                    <article class="excerpt excerpt-multi">
+                        <header>
+                            <a class="cat label label-important" href="#" data-original-title="" title="">
+                                ${content.getTaxonomyAsString('category')!'未分类'}
+                                <i class="label-arrow"></i></a>
+                            <h2><a target="_blank" href="${content.url!}"
+                                   title="${content.title!}">${content.title!}</a></h2>
+                            <small class="text-muted" data-original-title="" title=""><span
+                                    class="glyphicon glyphicon-picture"></span>${content.getImageCount()!0}
+                            </small>
+                        </header>
+                        <p class="text-muted time">
+                            <a href="#">${content.nickname!}</a> 发布于 ${content.created!string("yyyy-MM-dd HH:mm")}
+                        </p>
+                        <p class="focus">
+                            <a target="_blank" href="${content.url!}" class="thumbnail">
+                                <span class="item"><span class="thumb-span"><img
+                                        data-original="${content.imageByIndex(0)!}" class="thumb"
+                                        src="${content.imageByIndex(0)!}" style="display: inline;"></span></span>
+                                <span class="item"><span class="thumb-span"><img
+                                        data-original="${content.imageByIndex(1)!}" class="thumb"
+                                        src="${content.imageByIndex(1)!}" style="display: inline;"></span></span>
+                                <span class="item"><span class="thumb-span"><img
+                                        data-original="${content.imageByIndex(2)!}" class="thumb"
+                                        src="${content.imageByIndex(2)!}" style="display: inline;"></span></span>
+                                <span class="item"><span class="thumb-span"><img
+                                        data-original="${content.imageByIndex(3)!}" class="thumb"
+                                        src="${content.imageByIndex(3)!}" style="display: inline;"></span></span>
+                                <#if content.getImageCount() gt 8>
+                                    <span class="item"><span class="thumb-span"><img
+                                            data-original="${content.imageByIndex(4)!}" class="thumb"
+                                            src="${content.imageByIndex(4)!}" style="display: inline;"></span></span>
+                                <span class="item"><span class="thumb-span"><img
+                                        data-original="${content.imageByIndex(5)!}" class="thumb"
+                                        src="${content.imageByIndex(5)!}" style="display: inline;"></span></span>
+                                <span class="item"><span class="thumb-span"><img
+                                        data-original="${content.imageByIndex(6)!}" class="thumb"
+                                        src="${content.imageByIndex(6)!}" style="display: inline;"></span></span>
+                                <span class="item"><span class="thumb-span"><img
+                                        data-original="${content.imageByIndex(7)!}" class="thumb"
+                                        src="${content.imageByIndex(7)!}" style="display: inline;"></span></span>
+
+                                </#if>
+                            </a>
+                        </p>
+                        <p class="note">${content.summaryWithLen(150)!}</p>
+                        <p class="text-muted views">
+                            <span class="post-views">阅读(${content.view_count!'0'})</span>
+                            <span class="post-comments">评论(${content.comment_count!'0'})</span>
+                            <a href="javascript:;" class="post-like" data-pid="520" data-event="like"><i
+                                    class="glyphicon glyphicon-thumbs-up"></i>赞
+                                (<span>${content.vote_up!'0'}</span>)</a>
+                                <span class="post-tags">标签：
+                                   ${content.getTagsAsUrl()?replace(',',' / ')!}
+                                </span>
+                        </p>
+                    </article>
+
+                    <#else>
+
+                        <article class="excerpt excerpt-one">
+                            <header>
+                                <a class="cat label label-important" href="#" data-original-title="" title="">
+                                    ${content.getTaxonomyAsString('category')!'未分类'}
+                                    <i class="label-arrow"></i></a>
+                                <h2><a target="_blank" href="${content.url!}" title="${content.title!}">${content.title!}</a>
+                                </h2>
+                                <small class="text-muted" data-original-title="" title=""><span
+                                        class="glyphicon glyphicon-picture"></span>${content.getImageCount()!0}
+                                </small>
+                            </header>
+                            <p class="text-muted time">
+                                <a href="#">${content.nickname!content.username!}</a> 发布于 ${content.created!string("yyyy-MM-dd
+                                HH:mm")}</p>
+                            <p class="focus">
+                                <a target="_blank" href="${content.url!}" class="thumbnail"><span><img
+                                        data-original="${content.thumbnail!content.getFirstImage()!}" class="thumb" src="${content.thumbnail!content.getFirstImage()!}"
+                                        style="display: inline;"></span></a>
+                            </p>
+                            <p class="note">${content.summaryWithLen(150)!}</p>
+                            <p class="text-muted views">
+                                <a class="post-linkto" href="${content.url!}" target="_blank" rel="external nofollow">直达链接</a>
+                                <span class="post-views">阅读(${content.view_count!'0'})</span>
+                                <span class="post-comments">评论(${content.comment_count!'0'})</span>
+                                <a href="javascript:;" class="post-like" data-pid="449" data-event="like"><i
+                                        class="glyphicon glyphicon-thumbs-up"></i>赞 (<span>${content.vote_up!'0'}</span>)</a>
+                                    <span class="post-tags">标签：
+                                         ${content.getTagsAsUrl()?replace(',',' / ')!}
+                                    </span>
+                            </p>
+                        </article>
+
+                </#if>
+
+            </#list>
+
+            <!--分页 -->
+            <#include "inc/paginate.html"/>
+            <!--分页 -->
+        </@jp.indexPage>
+
+        <!--分页 -->
+
+        <!-- 最近更新 -->
+
+    </div>
+    </div>
+
+    <!-- 右边 -->
+    <#include "inc/right.html"/>
+    <!-- 右边 -->
+
+</section>
+
+</@layout>

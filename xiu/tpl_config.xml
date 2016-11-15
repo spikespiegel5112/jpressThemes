@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <infos>
+        <title>xiu</title>
+        <id>xiu</id>
+        <description>阿里百秀主题。</description>
+        <author>Retire</author>
+        <authorWebsite>http://www.v5soft.net</authorWebsite>
+        <version>v1.0</version>
+        <versionCode>1</versionCode>
+        <updateUrl>http://www.v5soft.net</updateUrl>
+    </infos>
+
+
+    <module title="文章" name="xiu" list="所有文章" add="发布文章" comment="评论">
+        <taxonomy title="分类" name="category" formType="select"/>
+        <taxonomy title="专题" name="feature" formType="select">
+            <metadata dataType="input" name="author" title="专题作者" description="这个数据只是模板自定义模型的测试。"
+                      placeholder="请填写作者用户名"/>
+        </taxonomy>
+        <taxonomy title="标签" name="tag" formType="input"/>
+
+        <metadata dataType="input" name="_order" title="排序" placeholder="请输入排序"/>
+        <metadata dataType="input" name="_from" title="来源" placeholder="请输入来源"/>
+        <metadata dataType="input" name="_link" title="链接" placeholder="请输入链接"/>
+        <metadata dataType="input" name="_address" title="地址" placeholder="请输入地址"/>
+    </module>
+
+    <module title="单页" name="page" list="所有单页" add="新建单页" comment="评论">
+    </module>
+
+    <thumbnail name="t1" size="192 x 145"/>
+
+</config>

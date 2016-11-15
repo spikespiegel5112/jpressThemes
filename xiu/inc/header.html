@@ -1,0 +1,49 @@
+<header class="header">
+    <div class="container">
+        <h1 class="logo"><a href="${CPATH!}/" title="${WEB_NAME!'Retire演示站'}">${WEB_NAME!'Retire演示站'}</a></h1>
+        <ul class="nav">
+            <li class="navmore"></li>
+            <#if "/" == REQUEST.requestURI!>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom current-post-ancestor current-menu-parent current-post-parent menu-item-1"><a href="${CPATH!}/"><span class="glyphicon glyphicon-home"></span>趣·首页</a></li>
+                <#else>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1"><a href="${CPATH!}/"><span class="glyphicon glyphicon-home"></span>趣·首页</a></li>
+            </#if>
+            <@jp.menus>
+                <#list menus as menu>
+                    <#if menu.isActive()>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom current-post-ancestor current-menu-parent current-post-parent menu-item-${menu.id!}"><a href="${menu.url!}"><span class="${menu.icon!}"></span>${menu.title!}</a></li>
+                        <#else>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-${menu.id!}"><a href="${menu.url!}"><span class="${menu.icon!}"></span>${menu.title!}</a></li>
+                    </#if>
+                </#list>
+            </@jp.menus>
+        </ul>
+        <form method="get" class="search-form" action="${CPATH}/s">
+            <input type="hidden" name="m" value="xiu">
+            <input class="form-control" name="k" type="text" placeholder="输入关键字" value="${keyword!}">
+            <input class="btn" type="submit" value="搜索">
+        </form>
+        <span class="glyphicon glyphicon-search m-search"></span>
+        <div class="feeds">
+            <#if OPTION('xiu_wechat_url')??>
+                <a class="feed feed-weixin" rel="external nofollow" href="${OPTION('xiu_wechat_url')!'#'}" target="_blank"><i></i>微信</a>
+            </#if>
+            <#if OPTION('xiu_weibo_url')??>
+                <a class="feed feed-weibo" rel="external nofollow" href="${OPTION('xiu_weibo_url')!'#'}" target="_blank"><i></i>微博</a>
+            </#if>
+            <#if OPTION('xiu_qq_url')??>
+                <a class="feed feed-tqq" rel="external nofollow" href="${OPTION('xiu_qq_url')!'#'}" target="_blank"><i></i>QQ</a>
+            </#if>
+            <#if OPTION('xiu_rss_url')??>
+                <a class="feed feed-rss" rel="external nofollow" href="${OPTION('xiu_rss_url')!'#'}" target="_blank"><i></i>RSS订阅</a>
+            </#if>
+        </div>
+        <div class="slinks">
+            <a href="/speak">留言</a>
+        </div>
+        <div class="user-signin">
+            <a target="_blank" href="${CPATH}/user/login">登陆</a><br>
+            <a target="_blank" href="${CPATH}/user/doRegister">注册</a>
+        </div>
+    </div>
+</header>

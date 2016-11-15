@@ -1,0 +1,20 @@
+<div class="widget widget_postlist"><h3 class="title"><strong>最新文章</strong></h3>
+    <ul class="items-02">
+        <@jp.contents module="xiu" count="8"  hasThumbnail="true">
+        <#list contents as content>
+        <li>
+            <a target="_blank" href="${content.url!}">
+            <span class="thumbnail"><img
+                data-original="${content.thumbnail!}"
+                class="thumb"
+                src="${content.thumbnail!}"
+                style="display: inline;">
+            </span>
+                <span class="text">${content.title!}</span>
+                <span  class="text-muted post-views">阅读(${content.view_count!})</span>
+            </a>
+        </li>
+        </#list>
+        </@jp.contents >
+    </ul>
+</div>
